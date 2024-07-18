@@ -6,8 +6,9 @@
 //
 
 import UIKit
-import RxSwift
+
 import RxCocoa
+import RxSwift
 
 class RepositoryListViewController: UITableViewController {
     
@@ -28,7 +29,7 @@ class RepositoryListViewController: UITableViewController {
     // MARK: - Setup UI
     
     private func setupUI() {
-        title = "Apple Repositories"
+        title = "Repositories"
         tableView.register(RepositoryListViewCell.self, forCellReuseIdentifier: "RepositoryListViewCell")
         tableView.rowHeight = 140
     }
@@ -55,13 +56,13 @@ class RepositoryListViewController: UITableViewController {
             )
         ) { _, repository, cell in
             cell.repository = repository
-        }.disposed(by: disposeBag)
+        }
+        .disposed(by: disposeBag)
         
         refreshControl?.rx.controlEvent(.valueChanged)
             .bind { [weak self] _ in
                 self?.viewModel.fetchRepositories(of: "Apple")
                 self?.refreshControl?.endRefreshing()
-                self?.tableView.reloadData()
             }
             .disposed(by: disposeBag)
     }

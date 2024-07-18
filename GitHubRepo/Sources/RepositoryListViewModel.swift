@@ -9,6 +9,7 @@ import RxCocoa
 import RxSwift
 
 class RepositoryListViewModel {
+    
     let repositories: BehaviorSubject<[Repository]> = BehaviorSubject(value: [])
     private let disposeBag = DisposeBag()
     
@@ -17,7 +18,7 @@ class RepositoryListViewModel {
             .map { organization -> URL? in
                 URL(string: "https://api.github.com/orgs/\(organization)/repos")
             }
-            .compactMap { $0 }
+            .compactMap { $0 }  // nil을 제거하여 URL 인스턴스만 전달
             .map { URLRequest(url: $0) }
             .flatMap { request -> Observable<(response: HTTPURLResponse, data: Data)> in
                 URLSession.shared.rx.response(request: request)
