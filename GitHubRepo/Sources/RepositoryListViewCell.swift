@@ -42,12 +42,12 @@ class RepositoryListViewCell: UITableViewCell {
     
     private func setupConstraints() {
         nameLabel.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview().inset(18)
+            $0.top.horizontalEdges.equalToSuperview().inset(18)
         }
         
         descriptionLabel.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.bottom).offset(3)
-            $0.leading.trailing.equalTo(nameLabel)
+            $0.horizontalEdges.equalTo(nameLabel)
         }
         
         starImageView.snp.makeConstraints {
